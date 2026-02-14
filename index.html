@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winver Calawagan | Portfolio</title>
+
+    <!-- Security meta headers: conservative defaults for static GitHub Pages
+         - Content-Security-Policy: allow only self for scripts/styles/images (styles inline allowed here because CSS is inlined)
+         - Referrer-Policy: limit referrer leakage
+         - Permissions-Policy (formerly Feature-Policy): disable powerful features by default -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self';">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f9;
+    color: #333;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    background: white;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+nav h2 {
+    color: #0d6efd;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #0d6efd;
+}
+
+section {
+    padding: 100px 50px;
+    min-height: 100vh;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background: linear-gradient(to right, #0d6efd, #4dabf7);
+    color: white;
+}
+
+.hero img {
+    width: 250px;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.hero-text h1 {
+    font-size: 40px;
+}
+
+.hero-text p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: white;
+    color: #0d6efd;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #e9ecef;
+}
+
+.content-section {
+    background: white;
+    margin: 20px 0;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s ease;
+}
+
+.content-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #0d6efd;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #0d6efd;
+    color: white;
+}
+@keyframes link-glow {
+    0% {
+        text-shadow: 0 0 6px rgba(13,110,253,0.6);
+    }
+    50% {
+        text-shadow: 0 0 14px rgba(13,110,253,0.95);
+    }
+    100% {
+        text-shadow: 0 0 6px rgba(13,110,253,0.6);
+    }
+}
+
+nav ul li a.active {
+    color: #0d6efd;
+    padding: 6px 8px;
+    border-radius: 6px;
+    box-shadow: 0 0 18px rgba(13,110,253,0.25);
+    animation: link-glow 1.8s infinite ease-in-out;
+}
+
+/* Responsive styles */
+#nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    nav {
+        padding: 12px 20px;
+    }
+
+    nav h2 {
+        font-size: 18px;
+    }
+
+    /* hide nav list by default on small screens */
+    nav ul {
+        position: absolute;
+        /* place directly under the nav's bottom; JS will set an exact value for small tweaks */
+        top: calc(100% + 8px);
+        right: 20px;
+        background: white;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        display: none;
+        min-width: 160px;
+        z-index: 1100;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li a {
+        padding: 8px 12px;
+        display: block;
+    }
+
+    #nav-toggle {
+        display: inline-block;
+    }
+
+    .hero {
+        flex-direction: column;
+        padding: 80px 20px;
+    }
+
+    .hero img {
+        width: 160px;
+    }
+
+    section {
+        padding: 80px 20px;
+    }
+
+    .content-section {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        right: 12px;
+        top: 56px;
+        min-width: 140px;
+    }
+
+    .hero img {
+        width: 140px;
+    }
+
+    .hero-text h1 {
+        font-size: 28px;
+    }
+
+    .btn {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>My Portfolio</h2>
+    <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#objective">Objective</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section id ="home"class="hero">
+    <img src="profile.png" alt="Profile Picture">
+    <div class="hero-text">
+        <h1>Winver Calawagan</h1>
+        <p>BSIT Student | Future Software Developer</p>
+        <a href="#about" class="btn">Explore More</a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="content-section">
+        <h2>👤 Personal Information</h2>
+        <p><strong>Name:</strong> Winver Calawagan</p>
+        <p><strong>Course:</strong> Bachelor of Science in Information Technology</p>
+        <p><strong>Year:</strong> 3rd Year</p>
+    </div>
+</section>
+
+<!-- OBJECTIVE -->
+<section id="objective">
+    <div class="content-section">
+        <h2>🎯 Career Objective</h2>
+        <p>
+            To become a professional software developer capable of designing and 
+            developing efficient, scalable, and user-centered applications that 
+            solve real-world problems.
+        </p>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="content-section">
+        <h2>🛠 Skills</h2>
+        <ul>
+            <li>HTML, CSS, JavaScript</li>
+            <li>PHP & MySQL</li>
+            <li>Mobile App Development</li>
+            <li>System Analysis and Design</li>
+        </ul>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="content-section">
+        <h2>📂 Projects</h2>
+        <ul>
+            <li>Tabagak SLP SmartInventory System</li>
+            <li>QR-Based Attendance Monitoring</li>
+            <li>Fingerprint-Based Attendance Monitoring</li>
+        </ul>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="content-section">
+        <h2>📞 Contact Information</h2>
+        <p>Email: <a href="mailto:calawagan11052003@gmail.com">Send Email</a>
+</p>
+        <p>GitHub: github.com/CallMeW-web</p>
+        <p>Phone: 09525434745</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Winver Calawagan | All Rights Reserved</p>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+
+</body>
+</html>
